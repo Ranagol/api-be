@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\JsonResponse;//ovo ce nam trebati za delete/destroy
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -82,13 +82,10 @@ class ContactController extends Controller
     public function update(Request $request, $id)
     {
         $contact = Contact::find($id);
-
         $contact->first_name = $request->input('first_name');
         $contact->last_name = $request->input('last_name');
         $contact->email = $request->input('email');
-
         $contact->save();
-
         return $contact;
     }
 
@@ -101,9 +98,7 @@ class ContactController extends Controller
     public function destroy($id)
     {
         $contact = Contact::find($id);
-
         $contact->delete();
-
-        return new JsonResponse(true);
+        return new JsonResponse(true);//vrati true da je obrisana. Ovo mora biti use Illuminate\Http\JsonResponse;
     }
 }
